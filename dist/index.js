@@ -12,17 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
+// Инициализируем dotenv ПЕРЕД всеми импортами
+dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const cors_1 = __importDefault(require("cors"));
-const dotenv_1 = __importDefault(require("dotenv"));
 const bumesApi_1 = require("./bumesApi");
 const fs_1 = __importDefault(require("fs"));
 // спсбио а дайте его логин пароль
 // aleks.evdokimov+ai-bot-client-dogim@gmail.com
 // 1234567
-// Инициализируем dotenv
-dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
 const CHECK_INTERVAL = parseInt(process.env.CHECK_INTERVAL || '30000'); // 30 секунд по умолчанию

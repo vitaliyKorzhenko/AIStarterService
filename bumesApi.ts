@@ -2,13 +2,13 @@
 const BASE_URL = process.env.BASE_URL || 'https://main.okk24.com';
 
 // Константы для авторизации
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'aleks.evdokimov+ai-bot-lid-dogim@gmail.com';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '1234567';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || '';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
-const triggerWebhookUrl = process.env.TRIGGER_WEBHOOK_URL || 'https://govorikavitaliydev.app.n8n.cloud/webhook/govorikaLead';
+const triggerWebhookUrl = process.env.TRIGGER_WEBHOOK_URL || '';
 
 // API endpoints
-const TASK_GET_ENDPOINT = process.env.TASK_GET_ENDPOINT || '/bumess/api/task/get';
+const TASK_GET_ENDPOINT = process.env.TASK_GET_ENDPOINT || '/bumess/api/task/get_quickly';
 const TASK_GET_QUICKLY_ENDPOINT = process.env.TASK_GET_QUICKLY_ENDPOINT || '/bumess/api/task/get_quickly';
 
 
@@ -53,6 +53,15 @@ export const loginToAdminPanel = async (
     error?: string;
 }> => {
     try {
+
+        console.log("START loginToAdminPanel");
+        console.log('BASE_URL', BASE_URL);
+        console.log('ADMIN_EMAIL', ADMIN_EMAIL);
+        console.log('ADMIN_PASSWORD', ADMIN_PASSWORD);
+        console.log('TASK_GET_ENDPOINT', TASK_GET_ENDPOINT);
+        console.log('TASK_GET_QUICKLY_ENDPOINT', TASK_GET_QUICKLY_ENDPOINT);
+        console.log('triggerWebhookUrl', triggerWebhookUrl);
+
         const response = await fetch(`${BASE_URL}/api/login`, {
             method: 'POST',
             headers: {
@@ -104,11 +113,18 @@ export const loginToAdminPanel = async (
 
 export const getTask = async (): Promise<any> => {
     try {
+        console.log("START getTask");
         const loginResponse = await loginToAdminPanel();
         if (!loginResponse.success) {
             return null;
         }   
 
+        console.log('ADMIN_EMAIL', ADMIN_EMAIL);
+        console.log('ADMIN_PASSWORD', ADMIN_PASSWORD);
+        console.log('BASE_URL', BASE_URL);
+        console.log('TASK_GET_ENDPOINT', TASK_GET_ENDPOINT);
+        console.log('TASK_GET_QUICKLY_ENDPOINT', TASK_GET_QUICKLY_ENDPOINT);
+        console.log('triggerWebhookUrl', triggerWebhookUrl);
         const token = getCurrentToken();
         if (!token) {
             return null;

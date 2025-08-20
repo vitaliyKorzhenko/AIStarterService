@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.triggerN8nWebhook = exports.getTaskQuickly = exports.getTask = exports.loginToAdminPanel = exports.clearToken = exports.setCurrentToken = exports.getCurrentToken = exports.setCredentials = void 0;
 const BASE_URL = process.env.BASE_URL || 'https://main.okk24.com';
 // Константы для авторизации
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'aleks.evdokimov+ai-bot-lid-dogim@gmail.com';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '1234567';
-const triggerWebhookUrl = process.env.TRIGGER_WEBHOOK_URL || 'https://govorikavitaliydev.app.n8n.cloud/webhook/govorikaLead';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || '';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+const triggerWebhookUrl = process.env.TRIGGER_WEBHOOK_URL || '';
 // API endpoints
-const TASK_GET_ENDPOINT = process.env.TASK_GET_ENDPOINT || '/bumess/api/task/get';
+const TASK_GET_ENDPOINT = process.env.TASK_GET_ENDPOINT || '/bumess/api/task/get_quickly';
 const TASK_GET_QUICKLY_ENDPOINT = process.env.TASK_GET_QUICKLY_ENDPOINT || '/bumess/api/task/get_quickly';
 let currentToken = null;
 let credentials = null;
@@ -38,6 +38,13 @@ const clearToken = () => {
 exports.clearToken = clearToken;
 const loginToAdminPanel = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (email = ADMIN_EMAIL, password = ADMIN_PASSWORD) {
     try {
+        console.log("START loginToAdminPanel");
+        console.log('BASE_URL', BASE_URL);
+        console.log('ADMIN_EMAIL', ADMIN_EMAIL);
+        console.log('ADMIN_PASSWORD', ADMIN_PASSWORD);
+        console.log('TASK_GET_ENDPOINT', TASK_GET_ENDPOINT);
+        console.log('TASK_GET_QUICKLY_ENDPOINT', TASK_GET_QUICKLY_ENDPOINT);
+        console.log('triggerWebhookUrl', triggerWebhookUrl);
         const response = yield fetch(`${BASE_URL}/api/login`, {
             method: 'POST',
             headers: {
@@ -82,10 +89,17 @@ exports.loginToAdminPanel = loginToAdminPanel;
 //get Task
 const getTask = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log("START getTask");
         const loginResponse = yield (0, exports.loginToAdminPanel)();
         if (!loginResponse.success) {
             return null;
         }
+        console.log('ADMIN_EMAIL', ADMIN_EMAIL);
+        console.log('ADMIN_PASSWORD', ADMIN_PASSWORD);
+        console.log('BASE_URL', BASE_URL);
+        console.log('TASK_GET_ENDPOINT', TASK_GET_ENDPOINT);
+        console.log('TASK_GET_QUICKLY_ENDPOINT', TASK_GET_QUICKLY_ENDPOINT);
+        console.log('triggerWebhookUrl', triggerWebhookUrl);
         const token = (0, exports.getCurrentToken)();
         if (!token) {
             return null;

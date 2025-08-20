@@ -1,7 +1,11 @@
+import dotenv from 'dotenv';
+
+// Инициализируем dotenv ПЕРЕД всеми импортами
+dotenv.config();
+
 import express from 'express';
 import http from 'http';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import { getTask, getTaskQuickly, triggerN8nWebhook } from './bumesApi';
 import fs from 'fs';
 
@@ -11,9 +15,6 @@ import fs from 'fs';
 
 // aleks.evdokimov+ai-bot-client-dogim@gmail.com
 // 1234567
-
-// Инициализируем dotenv
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
